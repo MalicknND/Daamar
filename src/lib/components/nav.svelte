@@ -13,6 +13,7 @@
       { label: 'À propos', href: '/a-propos' },
       { label: 'Contact', href: '/contact' }
     ];
+
   </script>
   
   <nav class="bg-white shadow-md">

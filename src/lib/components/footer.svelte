@@ -8,23 +8,23 @@
 
         <ul class="mt-8 space-y-4 text-sm">
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
               Company History
             </a>
           </li>
 
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> Meet the Team </a>
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/"> Meet the Team </a>
           </li>
 
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
               Employee Handbook
             </a>
           </li>
 
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> Careers </a>
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/"> Careers </a>
           </li>
         </ul>
       </div>
@@ -34,21 +34,21 @@
 
         <ul class="mt-8 space-y-4 text-sm">
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
               Web Development
             </a>
           </li>
 
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> Web Design </a>
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/"> Web Design </a>
           </li>
 
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> Marketing </a>
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/"> Marketing </a>
           </li>
 
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> Google Ads </a>
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/"> Google Ads </a>
           </li>
         </ul>
       </div>
@@ -58,25 +58,25 @@
 
         <ul class="mt-8 space-y-4 text-sm">
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> Online Guides </a>
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/"> Online Guides </a>
           </li>
 
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
               Conference Notes
             </a>
           </li>
 
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> Forum </a>
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/"> Forum </a>
           </li>
 
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> Downloads </a>
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/"> Downloads </a>
           </li>
 
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#">
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/">
               Upcoming Events
             </a>
           </li>
@@ -88,17 +88,17 @@
 
         <ul class="mt-8 space-y-4 text-sm">
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> FAQs </a>
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/"> FAQs </a>
           </li>
 
           <li>
-            <a class="text-gray-700 transition hover:text-gray-700/75" href="#"> Support </a>
+            <a class="text-gray-700 transition hover:text-gray-700/75" href="/"> Support </a>
           </li>
 
           <li>
             <a
               class="group flex justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
-              href="#"
+              href="/"
             >
               <span class="text-gray-700 transition group-hover:text-gray-700/75"> Live Chat </span>
 
