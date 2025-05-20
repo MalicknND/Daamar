@@ -50,7 +50,7 @@
           </a>
           <a 
             href="/auth/register" 
-            class="px-4 py-2 text-sm font-medium text-white bg-[#737A44] rounded-md hover:bg-blue-700"
+            class="px-4 py-2 text-sm font-medium text-white bg-[var(--color-primary)] rounded-md hover:bg-[var(--color-secondary)]"
           >
             S'inscrire
           </a>
@@ -105,7 +105,7 @@
             </a>
             <a 
               href="/auth/register" 
-              class="block px-4 py-2 text-base font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 text-center"
+              class="block px-4 py-2 text-base font-medium text-white bg-[var(--color-primary)] rounded-md hover:bg-[var(--color-secondary)] text-center"
             >
               S'inscrire
             </a>

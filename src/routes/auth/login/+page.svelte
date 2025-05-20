@@ -1,10 +1,10 @@
 <div class="flex flex-wrap">
   <div class="flex w-full flex-col md:w-1/2">
     <div class="flex justify-center pt-12 md:-mb-24 md:justify-start md:pl-12">
-      <a href="/" class="border-b-gray-700 border-b-4 pb-2 text-2xl font-bold text-gray-900"> Daamar . </a>
+      <a href="/" class="border-b-gray-700 border-b-4 pb-2 text-2xl font-bold text-[var(--color-primary)]"> Daamar </a>
     </div>
     <div class="lg:w-[28rem] mx-auto my-auto flex flex-col justify-center pt-8 md:justify-start md:px-6 md:pt-0">
-      <p class="text-left text-3xl font-bold">Welcome back, Olivia</p>
+      <p class="text-left text-3xl font-bold">Welcome back</p>
       <p class="mt-2 text-left text-gray-500">Welcome back, please enter your details.</p>
       <button class="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition focus:ring-2 hover:border-transparent hover:bg-black hover:text-white"><img class="mr-2 h-5" src="https://static.cdnlogo.com/logos/g/35/google-icon.svg" alt="Google icon" /> Log in with Google</button>
       <div class="relative mt-8 flex h-px place-items-center bg-gray-200">
@@ -21,7 +21,7 @@
             <input type="password" id="login-password" class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Password" />
           </div>
         </div>
-        <button type="submit" class="w-full rounded-lg bg-gray-900 px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2">Log in</button>
+        <button type="submit" class="w-full rounded-lg bg-[var(--color-primary)] px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2">Log in</button>
       </form>
       <div class="py-12 text-center">
         <p class="whitespace-nowrap text-gray-600">
@@ -31,13 +31,7 @@
       </div>
     </div>
   </div>
-  <div class="pointer-events-none relative hidden h-screen select-none bg-black md:block md:w-1/2">
-    <!-- <div class="absolute bottom-0 z-10 px-8 text-white opacity-100">
-      <p class="mb-8 text-3xl font-semibold leading-10">We work 10x faster than our compeititors and stay consistant. While they're bogged won with techincal debt, we're realeasing new features.</p>
-      <p class="mb-4 text-3xl font-semibold">John Elmond</p>
-      <p class="">Founder, Emogue</p>
-      <p class="mb-7 text-sm opacity-70">Web Design Agency</p>
-    </div> -->
-    <img class="absolute top-0 h-full w-full object-cover opacity-90" alt="Luxury car on a road" src="https://cdn.pixabay.com/photo/2020/01/20/20/39/car-4781370_1280.jpg" />
+  <div class="pointer-events-none relative hidden h-screen select-none bg-[var(--color-primary)] md:block md:w-1/2">
+    <img class="absolute top-0 h-full w-full object-cover opacity-90" alt="Luxury car on a road" src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=3869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
   </div>
 </div>
