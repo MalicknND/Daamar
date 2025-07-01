@@ -1,38 +1,53 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { user } from '$lib/stores';
+	import { goto } from '$app/navigation';
 	let email = '';
 	let password = '';
+	let loading = false;
 
 	const handleSubmit = async (e: Event) => {
 		e.preventDefault();
-
-		const user = {
-			Email: email,
-			password,
-		};
-
+		loading = true;
 		try {
-			const res = await fetch('https://directus.ckx.app/items/Users', {
+			// Authentification Directus
+			const res = await fetch('https://directus.ckx.app/auth/login', {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(user),
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ email, password })
 			});
-
 			if (!res.ok) {
 				const errData = await res.json();
 				console.error('Erreur lors de la connexion :', errData);
-				alert('Erreur : ' + errData.errors?.[0]?.message || 'Connexion échouée.');
+				loading = false;
 				return;
 			}
+			const tokens = await res.json();
+			const access_token = tokens.data.access_token;
+			const refresh_token = tokens.data.refresh_token;
 
-			const data = await res.json();
-			console.log('Connexion réussie :', data);
-			alert('Connexion réussie !');
+			// Récupérer les infos utilisateur
+			const userRes = await fetch('https://directus.ckx.app/users/me', {
+				headers: { 'Authorization': `Bearer ${access_token}` }
+			});
+			if (!userRes.ok) {
+				loading = false;
+				return;
+			}
+			const userData = await userRes.json();
+			user.set({
+				id: userData.data.id,
+				email: userData.data.email,
+				first_name: userData.data.first_name,
+				last_name: userData.data.last_name,
+				access_token,
+				refresh_token
+			});
+			goto('/');
 		} catch (err) {
 			console.error('Erreur réseau :', err);
-			alert('Erreur réseau');
+		} finally {
+			loading = false;
 		}
 	};
 </script>
@@ -61,7 +76,13 @@
               <input type="password" id="login-password" class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Password" bind:value={password} on:input={(e) => (password = (e.target as HTMLInputElement).value)} />
           </div>
         </div>
-        <button type="submit" class="w-full rounded-lg bg-[var(--color-primary)] px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2">Log in</button>
+        <button type="submit" class="w-full rounded-lg bg-[var(--color-primary)] px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2" disabled={loading}>
+          {#if loading}
+            <span class="loader mr-2"></span> Connexion...
+          {:else}
+            Log in
+          {/if}
+        </button>
       </form>
       <div class="py-12 text-center">
         <p class="whitespace-nowrap text-gray-600">
@@ -75,3 +96,20 @@
     <img class="absolute top-0 h-full w-full object-cover opacity-90" alt="Luxury car on a road" src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=3869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
   </div>
 </div>
+
+<style>
+  .loader {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid var(--color-primary, #3498db);
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>

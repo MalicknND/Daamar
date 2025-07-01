@@ -1,48 +1,55 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { user } from '$lib/stores';
+	import { goto } from '$app/navigation';
 	let firstname = '';
 	let lastname = '';
 	let email = '';
 	let password = '';
+	let loading = false;
 
 	const handleSubmit = async (e: Event) => {
 		e.preventDefault();
 
-		const user = {
-			firstname,
-			lastname,
-			Email: email,
+		const userData = {
+			email,
 			password,
-			role: 'db37eb16-ea89-4c79-bb26-72149bd1562e', 
+			first_name: firstname,
+			last_name: lastname
 		};
 
+		loading = true;
 		try {
-			const res = await fetch('https://directus.ckx.app/items/Users', {
+			const res = await fetch('https://directus.ckx.app/users', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify(user),
+				body: JSON.stringify(userData),
 			});
 
 			if (!res.ok) {
 				const errData = await res.json();
 				console.error('Erreur lors de l’inscription :', errData);
-				alert('Erreur : ' + errData.errors?.[0]?.message || 'Inscription échouée.');
+				loading = false;
 				return;
 			}
 
 			const data = await res.json();
-			console.log('Inscription réussie :', data);
-			alert('Compte créé avec succès !');
+			user.set({
+				id: data.data.id,
+				email: data.data.email,
+				first_name: data.data.first_name,
+				last_name: data.data.last_name
+			});
+			goto('/');
 		} catch (err) {
 			console.error('Erreur réseau :', err);
-			alert('Erreur réseau');
+		} finally {
+			loading = false;
 		}
 	};
 </script>
-
-
 
 <div class="flex flex-wrap">
     <div class="flex w-full flex-col md:w-1/2">
@@ -77,7 +84,13 @@
               <input type="password" id="login-password" class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Password" bind:value={password} />
             </div>
           </div>
-          <button type="submit" class="w-full rounded-lg bg-[var(--color-primary)] px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2" onclick={handleSubmit}>Create account</button>
+          <button type="submit" class="w-full rounded-lg bg-[var(--color-primary)] px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2" on:click={handleSubmit} disabled={loading}>
+            {#if loading}
+              <span class="loader mr-2"></span> Création...
+            {:else}
+              Create account
+            {/if}
+          </button>
         </form>
         <div class="py-12 text-center">
           <p class="whitespace-nowrap text-gray-600">
@@ -91,4 +104,21 @@
       <img class="absolute top-0 h-full w-full object-cover opacity-90" alt="Luxury car on a road" src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=3869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
     </div>
   </div>
+  
+<style>
+  .loader {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid var(--color-primary, #3498db);
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
   
