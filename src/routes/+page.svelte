@@ -1,2 +1,8 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>    
+	import DaamarGrid from '$lib/components/daamarGrid.svelte';
+	import Footer from '$lib/components/footer.svelte';
+</script>
+
+
+<DaamarGrid />
+<Footer />
