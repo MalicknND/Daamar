@@ -1,3 +1,43 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	let email = '';
+	let password = '';
+
+	const handleSubmit = async (e: Event) => {
+		e.preventDefault();
+
+		const user = {
+			Email: email,
+			password,
+		};
+
+		try {
+			const res = await fetch('https://directus.ckx.app/items/Users', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(user),
+			});
+
+			if (!res.ok) {
+				const errData = await res.json();
+				console.error('Erreur lors de la connexion :', errData);
+				alert('Erreur : ' + errData.errors?.[0]?.message || 'Connexion échouée.');
+				return;
+			}
+
+			const data = await res.json();
+			console.log('Connexion réussie :', data);
+			alert('Connexion réussie !');
+		} catch (err) {
+			console.error('Erreur réseau :', err);
+			alert('Erreur réseau');
+		}
+	};
+</script>
+
+
 <div class="flex flex-wrap">
   <div class="flex w-full flex-col md:w-1/2">
     <div class="flex justify-center pt-12 md:-mb-24 md:justify-start md:pl-12">
@@ -10,15 +50,15 @@
       <div class="relative mt-8 flex h-px place-items-center bg-gray-200">
         <div class="absolute left-1/2 h-6 w-14 -translate-x-1/2 bg-white text-center text-sm text-gray-500">or</div>
       </div>
-      <form class="flex flex-col pt-3 md:pt-8">
+      <form class="flex flex-col pt-3 md:pt-8" on:submit={handleSubmit}>
         <div class="flex flex-col pt-4">
           <div class="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
-            <input type="email" id="login-email" class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Email" />
+            <input type="email" id="login-email" class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Email" bind:value={email} on:input={(e) => (email = (e.target as HTMLInputElement).value)} />
           </div>
         </div>
         <div class="mb-12 flex flex-col pt-4">
           <div class="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
-            <input type="password" id="login-password" class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Password" />
+              <input type="password" id="login-password" class="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Password" bind:value={password} on:input={(e) => (password = (e.target as HTMLInputElement).value)} />
           </div>
         </div>
         <button type="submit" class="w-full rounded-lg bg-[var(--color-primary)] px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2">Log in</button>

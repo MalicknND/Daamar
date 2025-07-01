@@ -6,7 +6,7 @@
 		const res = await fetch('https://directus.ckx.app/items/Cars?fields=*,image.*');
 		const data = await res.json();
 		cars = data.data;
-		console.log(cars);
+		console.log(cars[0].image);
 	});
 </script>
 
