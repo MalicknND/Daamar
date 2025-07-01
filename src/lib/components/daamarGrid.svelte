@@ -15,7 +15,7 @@
 	<div class="mx-auto grid max-w-screen-xl grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
 		{#each cars as car}
 			<article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
-				<a href="/">
+				<a href={`/cars/${car.id}`}>
 					<div class="relative flex items-end overflow-hidden rounded-xl">
 						{#if car.image}
 							<img src={`https://directus.ckx.app/assets/${car.image.id}`} alt={car.marque} />
