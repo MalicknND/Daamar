@@ -7,6 +7,7 @@
 	let email = '';
 	let password = '';
 	let loading = false;
+	const API_URL = import.meta.env.VITE_API_URL;
 
 	const handleSubmit = async (e: Event) => {
 		e.preventDefault();
@@ -20,7 +21,7 @@
 
 		loading = true;
 		try {
-			const res = await fetch('https://directus.ckx.app/users', {
+			const res = await fetch(`${API_URL}/users`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

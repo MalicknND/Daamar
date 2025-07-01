@@ -2,13 +2,55 @@
     let email = '';
     let subject = '';
     let message = '';
+    let loading = false;
+    let error = '';
+    let success = '';
+    const API_URL = import.meta.env.VITE_API_URL;
+
+    function validateEmail(email: string) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
   
     const handleSubmit = async (e: Event) => {
       e.preventDefault();
-      console.log('Email:', email);
-      console.log('Subject:', subject);
-      console.log('Message:', message);
-      // Tu peux ensuite envoyer ces données à une API ici
+      error = '';
+      success = '';
+      if (!validateEmail(email)) {
+        error = "L'email n'est pas valide.";
+        return;
+      }
+      if (!subject.trim()) {
+        error = "L'objet est requis.";
+        return;
+      }
+      if (!message.trim()) {
+        error = "Le message est requis.";
+        return;
+      }
+      loading = true;
+      try {
+        const res = await fetch(`${API_URL}/items/ContactForm`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            objet: subject,
+            message
+          })
+        });
+        if (!res.ok) {
+          const errData = await res.json();
+          error = errData.errors?.[0]?.message || 'Erreur lors de l’envoi du message.';
+          loading = false;
+          return;
+        }
+        success = 'Votre message a bien été envoyé !';
+        email = subject = message = '';
+      } catch (e) {
+        error = 'Erreur réseau.';
+      } finally {
+        loading = false;
+      }
     };
   </script>
   
@@ -29,6 +71,12 @@
         class="mx-auto w-full max-w-xl border-gray-200 px-10 py-8 md:px-8"
         on:submit={handleSubmit}
       >
+        {#if error}
+          <div class="mb-4 text-red-600">{error}</div>
+        {/if}
+        {#if success}
+          <div class="mb-4 text-green-600">{success}</div>
+        {/if}
         <div class="mb-4">
           <label class="text mb-2 block font-medium" for="email">Your e-mail:</label>
           <input
@@ -64,13 +112,34 @@
         <div class="flex items-center">
           <div class="flex-1"></div>
           <button
-            class="rounded-xl bg-[var(--color-primary)] px-4 py-3 text-center font-bold text-white hover:bg-[var(--color-secondary)]"
+            class="rounded-xl bg-[var(--color-primary)] px-4 py-3 text-center font-bold text-white hover:bg-[var(--color-secondary)] disabled:opacity-60"
             type="submit"
+            disabled={loading}
           >
-            Send message
+            {#if loading}
+              <span class="loader mr-2"></span> Envoi...
+            {:else}
+              Send message
+            {/if}
           </button>
         </div>
       </form>
     </div>
   </div>
+  <style>
+    .loader {
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid var(--color-primary, #3498db);
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
   

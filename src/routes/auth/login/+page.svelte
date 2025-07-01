@@ -5,13 +5,14 @@
 	let email = '';
 	let password = '';
 	let loading = false;
+	const API_URL = import.meta.env.VITE_API_URL;
 
 	const handleSubmit = async (e: Event) => {
 		e.preventDefault();
 		loading = true;
 		try {
 			// Authentification Directus
-			const res = await fetch('https://directus.ckx.app/auth/login', {
+			const res = await fetch(`${API_URL}/auth/login`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ email, password })
@@ -27,7 +28,7 @@
 			const refresh_token = tokens.data.refresh_token;
 
 			// Récupérer les infos utilisateur
-			const userRes = await fetch('https://directus.ckx.app/users/me', {
+			const userRes = await fetch(`${API_URL}/users/me`, {
 				headers: { 'Authorization': `Bearer ${access_token}` }
 			});
 			if (!userRes.ok) {

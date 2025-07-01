@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	let cars: any[] = [];
+	const API_URL = import.meta.env.VITE_API_URL;
 
 	onMount(async () => {
-		const res = await fetch('https://directus.ckx.app/items/Cars?fields=*,image.*');
+		const res = await fetch(`${API_URL}/items/Cars?fields=*,image.*`);
 		const data = await res.json();
 		cars = data.data;
 		console.log(cars[0].image);
@@ -18,7 +19,7 @@
 				<a href={`/cars/${car.id}`}>
 					<div class="relative flex items-end overflow-hidden rounded-xl">
 						{#if car.image}
-							<img src={`https://directus.ckx.app/assets/${car.image.id}`} alt={car.marque} />
+							<img src={`${API_URL}/assets/${car.image.id}`} alt={car.marque} />
 						{:else}
 							<img
 								src="https://cdn.pixabay.com/photo/2023/02/04/20/32/man-7768120_1280.jpg"
