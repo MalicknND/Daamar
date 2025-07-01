@@ -75,3 +75,9 @@ npm run preview
 
 ---
 
+### Membres du groupe
+```bash
+Malick Siguy NDIAYE
+Sven DOCKX
+Aminata TRAORE
+```
