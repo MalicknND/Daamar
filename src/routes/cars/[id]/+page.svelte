@@ -38,6 +38,6 @@ onMount(async () => {
       <li><b>Type :</b> {car.type_voitures}</li>
       {#if car.modele}<li><b>Modèle :</b> {car.modele}</li>{/if}
     </ul>
-    <a href="/cars" class="text-blue-600 underline">Retour à la liste</a>
+    <a href="/" class="text-blue-600 underline">Retour à la liste</a>
   </div>
 {/if} 

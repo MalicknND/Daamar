@@ -40,7 +40,7 @@
         });
         if (!res.ok) {
           const errData = await res.json();
-          error = errData.errors?.[0]?.message || 'Erreur lors de l’envoi du message.';
+          error = errData.errors?.[0]?.message || 'Erreur lors de l\'envoi du message.';
           loading = false;
           return;
         }
@@ -57,7 +57,7 @@
   <div class="font-sans text-base text-gray-900 sm:px-10">
     <div class="text-base text-gray-900">
       <div class="mx-2 pt-12 text-center md:mx-auto md:w-2/3 md:pb-12">
-        <h1 class="mb-4 text-3xl font-black sm:text-5xl xl:text-6xl">Contact us</h1>
+        <h1 class="mb-4 text-3xl font-black sm:text-5xl xl:text-6xl">Contactez-nous</h1>
         <div class="text-lg sm:text-xl xl:text-xl text-gray-900">
           <p class="mb-4">
             Pour toute question ou demande de service, veuillez nous contacter via le formulaire ci-dessous. Nous vous recontacterons dans les plus brefs délais.
@@ -78,7 +78,7 @@
           <div class="mb-4 text-green-600">{success}</div>
         {/if}
         <div class="mb-4">
-          <label class="text mb-2 block font-medium" for="email">Your e-mail:</label>
+          <label class="text mb-2 block font-medium" for="email">Votre e-mail :</label>
           <input
             bind:value={email}
             class="w-full rounded border border-gray-300 px-3 py-2 outline-none ring-blue-500 focus:ring"
@@ -89,7 +89,7 @@
         </div>
   
         <div class="mb-4">
-          <label class="text mb-2 block font-medium" for="subject">Subject:</label>
+          <label class="text mb-2 block font-medium" for="subject">Objet :</label>
           <input
             bind:value={subject}
             class="w-full rounded border border-gray-300 px-3 py-2 outline-none ring-blue-500 focus:ring"
@@ -100,7 +100,7 @@
         </div>
   
         <div class="mb-4">
-          <label class="text mb-2 block font-medium" for="message">Message:</label>
+          <label class="text mb-2 block font-medium" for="message">Message :</label>
           <textarea
             bind:value={message}
             class="h-52 w-full rounded border border-gray-300 px-3 py-2 outline-none ring-blue-500 focus:ring"
@@ -119,7 +119,7 @@
             {#if loading}
               <span class="loader mr-2"></span> Envoi...
             {:else}
-              Send message
+              Envoyer
             {/if}
           </button>
         </div>
